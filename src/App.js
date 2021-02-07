@@ -8,6 +8,7 @@ import { useFadeIn } from "./hooks/useFadeIn";
 import { useNetwork } from "./hooks/useNetwork";
 import { useScroll } from "./hooks/useScroll";
 import { useFullscreen } from "./hooks/useFullscreen";
+import { useNotification } from "./hooks/useNotification";
 
 const tabs = [
   {
@@ -38,6 +39,9 @@ const App = () => {
   });
   const { y } = useScroll();
   const { element, triggerFullscreen } = useFullscreen();
+  const triggerNotification = useNotification("알림이 있습니다.", {
+    body: "Everything is OK?",
+  });
   return (
     <div
       className="App"
@@ -80,6 +84,8 @@ const App = () => {
         />
         <button onClick={triggerFullscreen}>Full Screen</button>
       </div>
+      <hr />
+      <button onClick={triggerNotification}>Get Notification</button>
       <hr />
       <div
         style={{
