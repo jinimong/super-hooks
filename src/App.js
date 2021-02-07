@@ -5,6 +5,7 @@ import { useConfirm } from "./hooks/useConfirm";
 import { usePreventLeave } from "./hooks/usePreventLeave";
 import { useBeforeLeave } from "./hooks/useBeforeLeave";
 import { useFadeIn } from "./hooks/useFadeIn";
+import { useNetwork } from "./hooks/useNetwork";
 
 const tabs = [
   {
@@ -30,6 +31,9 @@ const App = () => {
   useBeforeLeave(() => console.log("Plz dont go"));
   const fadeIn = useFadeIn();
   const fadeInWithDelay = useFadeIn(3, 1);
+  const onLine = useNetwork((status) => {
+    console.log(status ? "This is online. :)" : "This is offline. :<");
+  });
   return (
     <div className="App">
       <h1 ref={title}>Hello</h1>
@@ -51,6 +55,8 @@ const App = () => {
       <button {...fadeInWithDelay} onClick={disablePrevent}>
         unprotect
       </button>
+      <hr />
+      <div>{onLine ? "Online" : "Offline"}</div>
     </div>
   );
 };
