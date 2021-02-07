@@ -9,6 +9,7 @@ import { useNetwork } from "./hooks/useNetwork";
 import { useScroll } from "./hooks/useScroll";
 import { useFullscreen } from "./hooks/useFullscreen";
 import { useNotification } from "./hooks/useNotification";
+import { useAxios } from "./hooks/useAxios";
 
 const tabs = [
   {
@@ -42,6 +43,15 @@ const App = () => {
   const triggerNotification = useNotification("알림이 있습니다.", {
     body: "Everything is OK?",
   });
+  const { loading, data, error, refetch } = useAxios({
+    url: "https://dog.ceo/api/breeds/image/random",
+  });
+  console.log(
+    `Loading: ${loading}\nError: ${error}\nData: ${JSON.stringify(data)}`,
+  );
+  if (!data || loading) {
+    return <div>Loading ...</div>;
+  }
   return (
     <div
       className="App"
@@ -76,13 +86,14 @@ const App = () => {
         }}>
         <img
           ref={element}
-          src="https://random.dog/5d9b4f1f-ed47-47d2-95b4-ac58ac0834b7.jpg"
+          src={data.data.message}
           style={{
             maxHeight: "100%",
           }}
           alt=""
         />
         <button onClick={triggerFullscreen}>Full Screen</button>
+        <button onClick={refetch}>Next Dog</button>
       </div>
       <hr />
       <button onClick={triggerNotification}>Get Notification</button>
