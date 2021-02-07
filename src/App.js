@@ -1,15 +1,17 @@
-import { useClick } from "./hooks/useClick";
-import { useTab } from "./hooks/useTab";
-import { useTitle } from "./hooks/useTitle";
-import { useConfirm } from "./hooks/useConfirm";
-import { usePreventLeave } from "./hooks/usePreventLeave";
-import { useBeforeLeave } from "./hooks/useBeforeLeave";
-import { useFadeIn } from "./hooks/useFadeIn";
-import { useNetwork } from "./hooks/useNetwork";
-import { useScroll } from "./hooks/useScroll";
-import { useFullscreen } from "./hooks/useFullscreen";
-import { useNotification } from "./hooks/useNotification";
-import { useAxios } from "./hooks/useAxios";
+import {
+  useAxios,
+  useBeforeLeave,
+  useClick,
+  useConfirm,
+  useFadeIn,
+  useFullscreen,
+  useNetwork,
+  useNotification,
+  usePreventLeave,
+  useScroll,
+  useTab,
+  useTitle,
+} from "./hooks";
 
 const tabs = [
   {
@@ -46,9 +48,6 @@ const App = () => {
   const { loading, data, error, refetch } = useAxios({
     url: "https://dog.ceo/api/breeds/image/random",
   });
-  console.log(
-    `Loading: ${loading}\nError: ${error}\nData: ${JSON.stringify(data)}`,
-  );
   if (!data || loading) {
     return <div>Loading ...</div>;
   }
