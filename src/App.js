@@ -2,6 +2,7 @@ import { useClick } from "./hooks/useClick";
 import { useTab } from "./hooks/useTab";
 import { useTitle } from "./hooks/useTitle";
 import { useConfirm } from "./hooks/useConfirm";
+import { usePreventLeave } from "./hooks/usePreventLeave";
 
 const tabs = [
   {
@@ -23,6 +24,7 @@ const App = () => {
     () => console.log("confirm !!"),
     () => console.log("cancel .."),
   );
+  const { enablePrevent, disablePrevent } = usePreventLeave();
   return (
     <div className="App">
       <h1 ref={title}>Hello</h1>
@@ -37,6 +39,9 @@ const App = () => {
         </button>
       ))}
       <div onClick={confirm}>{currentTab.text}</div>
+      <hr />
+      <button onClick={enablePrevent}>protect</button>
+      <button onClick={disablePrevent}>unprotect</button>
     </div>
   );
 };
