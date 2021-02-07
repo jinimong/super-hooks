@@ -7,6 +7,7 @@ import { useBeforeLeave } from "./hooks/useBeforeLeave";
 import { useFadeIn } from "./hooks/useFadeIn";
 import { useNetwork } from "./hooks/useNetwork";
 import { useScroll } from "./hooks/useScroll";
+import { useFullscreen } from "./hooks/useFullscreen";
 
 const tabs = [
   {
@@ -36,6 +37,7 @@ const App = () => {
     console.log(status ? "This is online. :)" : "This is offline. :<");
   });
   const { y } = useScroll();
+  const { element, triggerFullscreen } = useFullscreen();
   return (
     <div
       className="App"
@@ -63,6 +65,21 @@ const App = () => {
       </button>
       <hr />
       <div>{onLine ? "Online" : "Offline"}</div>
+      <hr />
+      <div
+        style={{
+          height: "100px",
+        }}>
+        <img
+          ref={element}
+          src="https://random.dog/5d9b4f1f-ed47-47d2-95b4-ac58ac0834b7.jpg"
+          style={{
+            maxHeight: "100%",
+          }}
+          alt=""
+        />
+        <button onClick={triggerFullscreen}>Full Screen</button>
+      </div>
       <hr />
       <div
         style={{
