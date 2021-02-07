@@ -3,6 +3,8 @@ import { useTab } from "./hooks/useTab";
 import { useTitle } from "./hooks/useTitle";
 import { useConfirm } from "./hooks/useConfirm";
 import { usePreventLeave } from "./hooks/usePreventLeave";
+import { useBeforeLeave } from "./hooks/useBeforeLeave";
+import { useFadeIn } from "./hooks/useFadeIn";
 
 const tabs = [
   {
@@ -25,6 +27,9 @@ const App = () => {
     () => console.log("cancel .."),
   );
   const { enablePrevent, disablePrevent } = usePreventLeave();
+  useBeforeLeave(() => console.log("Plz dont go"));
+  const fadeIn = useFadeIn();
+  const fadeInWithDelay = useFadeIn(3, 1);
   return (
     <div className="App">
       <h1 ref={title}>Hello</h1>
@@ -40,8 +45,12 @@ const App = () => {
       ))}
       <div onClick={confirm}>{currentTab.text}</div>
       <hr />
-      <button onClick={enablePrevent}>protect</button>
-      <button onClick={disablePrevent}>unprotect</button>
+      <button {...fadeIn} onClick={enablePrevent}>
+        protect
+      </button>
+      <button {...fadeInWithDelay} onClick={disablePrevent}>
+        unprotect
+      </button>
     </div>
   );
 };
