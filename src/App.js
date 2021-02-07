@@ -1,3 +1,4 @@
+import { useClick } from "./hooks/useClick";
 import { useTab } from "./hooks/useTab";
 import { useTitle } from "./hooks/useTitle";
 
@@ -15,9 +16,10 @@ const tabs = [
 const App = () => {
   const { currentTab, setTabIndex } = useTab(0, tabs);
   const setTitle = useTitle(currentTab.title);
+  const title = useClick(() => window.alert("say hello"));
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <h1 ref={title}>Hello</h1>
       {tabs.map((tab, index) => (
         <button
           key={tab.title}
