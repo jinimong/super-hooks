@@ -1,6 +1,7 @@
 import { useClick } from "./hooks/useClick";
 import { useTab } from "./hooks/useTab";
 import { useTitle } from "./hooks/useTitle";
+import { useConfirm } from "./hooks/useConfirm";
 
 const tabs = [
   {
@@ -17,6 +18,11 @@ const App = () => {
   const { currentTab, setTabIndex } = useTab(0, tabs);
   const setTitle = useTitle(currentTab.title);
   const title = useClick(() => window.alert("say hello"));
+  const confirm = useConfirm(
+    "Are you sure?",
+    () => console.log("confirm !!"),
+    () => console.log("cancel .."),
+  );
   return (
     <div className="App">
       <h1 ref={title}>Hello</h1>
@@ -27,10 +33,10 @@ const App = () => {
             setTabIndex(index);
             setTitle(tab.title);
           }}>
-          {currentTab.title}
+          {tab.title}
         </button>
       ))}
-      <div>{currentTab.text}</div>
+      <div onClick={confirm}>{currentTab.text}</div>
     </div>
   );
 };
