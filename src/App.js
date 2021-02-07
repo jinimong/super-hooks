@@ -6,6 +6,7 @@ import { usePreventLeave } from "./hooks/usePreventLeave";
 import { useBeforeLeave } from "./hooks/useBeforeLeave";
 import { useFadeIn } from "./hooks/useFadeIn";
 import { useNetwork } from "./hooks/useNetwork";
+import { useScroll } from "./hooks/useScroll";
 
 const tabs = [
   {
@@ -34,8 +35,13 @@ const App = () => {
   const onLine = useNetwork((status) => {
     console.log(status ? "This is online. :)" : "This is offline. :<");
   });
+  const { y } = useScroll();
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        height: "500vh",
+      }}>
       <h1 ref={title}>Hello</h1>
       {tabs.map((tab, index) => (
         <button
@@ -57,6 +63,14 @@ const App = () => {
       </button>
       <hr />
       <div>{onLine ? "Online" : "Offline"}</div>
+      <hr />
+      <div
+        style={{
+          position: "fixed",
+          color: y > 1000 ? "red" : "blue",
+        }}>
+        scrollY : {y}
+      </div>
     </div>
   );
 };
