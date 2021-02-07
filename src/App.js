@@ -1,8 +1,9 @@
 import "./styles.css";
-import useInput from "./hooks/useInput";
+import { useInput } from "./hooks/useInput";
 
 const App = () => {
-  const name = useInput("Mr.");
+  const validateMaxLength = (value) => value.length <= 10;
+  const name = useInput("Mr.", validateMaxLength);
   return (
     <div className="App">
       <h1>Hello</h1>
