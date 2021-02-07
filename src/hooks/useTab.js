@@ -6,7 +6,7 @@ export const useTab = (initialTabIndex, allTabs) => {
     throw Error("Not Found Tabs");
   }
   return {
-    tab: allTabs[tabIndex],
+    currentTab: allTabs[tabIndex],
     setTabIndex,
   };
 };

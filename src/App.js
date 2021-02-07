@@ -1,4 +1,5 @@
 import { useTab } from "./hooks/useTab";
+import { useTitle } from "./hooks/useTitle";
 
 const tabs = [
   {
@@ -12,16 +13,22 @@ const tabs = [
 ];
 
 const App = () => {
-  const { tab, setTabIndex } = useTab(0, tabs);
+  const { currentTab, setTabIndex } = useTab(0, tabs);
+  const setTitle = useTitle(currentTab.title);
   return (
     <div className="App">
       <h1>Hello</h1>
       {tabs.map((tab, index) => (
-        <button key={tab.title} onClick={() => setTabIndex(index)}>
-          {tab.title}
+        <button
+          key={tab.title}
+          onClick={() => {
+            setTabIndex(index);
+            setTitle(tab.title);
+          }}>
+          {currentTab.title}
         </button>
       ))}
-      <div>{tab.text}</div>
+      <div>{currentTab.text}</div>
     </div>
   );
 };
